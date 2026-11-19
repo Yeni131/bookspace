@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonLabel } from '@ionic/angular';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonGrid,IonRow,IonCol,IonCard,IonCardContent,IonImg} from '@ionic/angular';
 import { NgFor } from '@angular/common';
 import { BooksService } from '../services/books.service';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
@@ -10,7 +10,7 @@ import { NgForm } from '@angular/forms';
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonLabel, NgFor,  ExploreContainerComponent],
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonGrid,IonRow,IonCol,IonCard,IonCardContent,IonImg, NgFor,  ExploreContainerComponent],
 })
 export class Tab1Page implements OnInit{
   libros: any[] = [];
@@ -31,5 +31,11 @@ export class Tab1Page implements OnInit{
       console.error('Error al cargar libros:', error);
     }
   });
+  } 
+  obtenerPortada(libro: any): string {
+    if(libro.cover_i){
+       return `https://covers.openlibrary.org/b/id/${libro.cover_i}-M.jpg`;
+    }
+    return 'assets/icon/favicon.png';
   }
 }
