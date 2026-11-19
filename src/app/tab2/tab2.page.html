@@ -13,16 +13,38 @@
   <div class="ion-padding">
     <h2>Mis Lecturas</h2>
     <p>Organiza tus libros y lleva un registro de tus lecturas.</p>
-    <ion-segment value="quiero-leer">
-    <ion-segment-button values="quiero-leer">
-      <ion-label>Quiero leer</ion-label>
-    </ion-segment-button>
-    <ion-segment-button values="leyendo">
-      <ion-label>Leyendo</ion-label>
-    </ion-segment-button>
-    <ion-segment-button values="leidos">
-      <ion-label>Leidos</ion-label>
-    </ion-segment-button>
-    </ion-segment>
+    
+<ion-segment
+  [(ngModel)]="categoriaSeleccionada">
+
+  <ion-segment-button value="quiero-leer">
+    <ion-label>Quiero leer</ion-label>
+  </ion-segment-button>
+
+  <ion-segment-button value="leyendo">
+    <ion-label>Leyendo</ion-label>
+  </ion-segment-button>
+
+  <ion-segment-button value="leidos">
+    <ion-label>Leídos</ion-label>
+  </ion-segment-button>
+
+</ion-segment>
+
+<div class="ion-padding ion-text-center">
+
+  @if (categoriaSeleccionada === 'quiero-leer') {
+    <p>Todavía no tenés libros que quieras leer.</p>
+  }
+
+  @if (categoriaSeleccionada === 'leyendo') {
+    <p>Todavía no estás leyendo ningún libro.</p>
+  }
+
+  @if (categoriaSeleccionada === 'leidos') {
+    <p>Todavía no terminaste ningún libro.</p>
+  }
+
+  </div>
   </div>
 </ion-content>
