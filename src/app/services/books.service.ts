@@ -32,4 +32,9 @@ export class BooksService {
             }
         );
     }
+    obtenerDetalleLibro(id: string): Observable<any> {
+    return this.http.get<any>(
+    `${this.apiUrl}/works/${id}.json`
+    );
+    }
 }

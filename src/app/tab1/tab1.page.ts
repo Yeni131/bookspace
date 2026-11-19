@@ -4,7 +4,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { BooksService } from '../services/books.service';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { NgForm } from '@angular/forms';
-
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,7 +17,7 @@ export class Tab1Page implements OnInit{
   libros: any[] = [];
   cargando = false;
   mensajeError = '';
-  constructor(private booksService: BooksService,private cdr: ChangeDetectorRef) {}
+  constructor(private booksService: BooksService,private cdr: ChangeDetectorRef,private router: Router) {}
   ngOnInit(): void {
     this.cargarLibros();
   } 
@@ -72,4 +72,11 @@ consultarLibros(texto: string) {
     }
     return 'assets/icon/favicon.png';
   }
+  verDetalle(libro: any) {
+  if (!libro.key) {
+    return;
+  }
+  const id = libro.key.split('/').pop();
+  this.router.navigate(['/libro', id]);
+}
 }

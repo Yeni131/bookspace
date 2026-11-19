@@ -1,0 +1,32 @@
+.portada {
+  max-width: 210px;
+  margin: 25px auto;
+}
+.portada ion-img {
+  width: 100%;
+}
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}
+.fecha {
+  text-align: center;
+  color: var(--ion-color-medium);
+  font-size: 14px;
+}
+h2 {
+  font-size: 19px;
+  font-weight: bold;
+  margin-top: 30px;
+}
+.descripcion {
+  font-size: 15px;
+  line-height: 1.7;
+  white-space: pre-line;
+}
+.estado {
+  text-align: center;
+  padding: 35px 15px;
+}

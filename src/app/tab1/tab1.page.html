@@ -23,7 +23,7 @@
   <ion-grid>
     <ion-row>
       <ion-col size="6" *ngFor="let libro of libros">
-        <ion-card>
+        <ion-card  button="true" (click)="verDetalle(libro)">
           <ion-img
             [src]="obtenerPortada(libro)"
             [alt]="libro.title">
