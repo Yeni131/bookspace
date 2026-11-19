@@ -68,7 +68,7 @@ consultarLibros(texto: string) {
 }
   obtenerPortada(libro: any): string {
     if(libro.cover_i){
-       return `https://covers.openlibrary.org/b/id/${libro.cover_i}-M.jpg`;
+       return `https://covers.openlibrary.org/b/id/${libro.cover_i}-L.jpg`;
     }
     return 'assets/icon/favicon.png';
   }

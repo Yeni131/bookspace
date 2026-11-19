@@ -8,8 +8,12 @@ ion-card {
 }
 ion-img {
   width: 100%;
-  height: 220px;
+  height: 230px;
   object-fit: cover;
+  background-color: var(--ion-color-light);
+}
+ion-img::part(image) {
+  object-fit: contain;
 }
 ion-card-content {
   padding: 12px;
