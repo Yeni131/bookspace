@@ -1,8 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button
-        defaultHref="/tabs/tab1">
+      <ion-back-button defaultHref="/tabs/tab1">
       </ion-back-button>
     </ion-buttons>
     <ion-title>Detalle del libro</ion-title>
@@ -24,6 +23,33 @@
     <p class="fecha">
       Primera publicación: {{ obtenerAnio() }}
     </p>
+    <div class="biblioteca">
+      <h2>Mi Biblioteca</h2>
+      <ion-select
+        label="Estado de lectura"
+        label-placement="stacked"
+        interface="popover"
+        [value]="categoriaSeleccionada"
+        (ionChange)="cambiarCategoria($event)">
+        <ion-select-option value="quiero-leer">
+          Quiero leer
+        </ion-select-option>
+        <ion-select-option value="leyendo">
+          Leyendo
+        </ion-select-option>
+        <ion-select-option value="leidos">
+          Leídos
+        </ion-select-option>
+      </ion-select>
+      <ion-button
+        expand="block"
+        (click)="guardarEnBiblioteca()">
+        Guardar en Mi Biblioteca
+      </ion-button>
+      <p *ngIf="mensajeBiblioteca">
+        {{ mensajeBiblioteca }}
+      </p>
+    </div>
     <h2>Sinopsis</h2>
     <p class="descripcion">
       {{ obtenerDescripcion() }}
