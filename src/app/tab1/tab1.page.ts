@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonGrid,IonRow,IonCol,IonCard,IonCardContent,IonImg,IonSearchbar} from '@ionic/angular';
-import { NgFor } from '@angular/common';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonGrid,IonRow,IonCol,IonCard,IonCardContent,IonImg,IonSearchbar,IonSpinner} from '@ionic/angular';
+import { NgFor, NgIf } from '@angular/common';
 import { BooksService } from '../services/books.service';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { NgForm } from '@angular/forms';
@@ -10,49 +10,50 @@ import { NgForm } from '@angular/forms';
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonGrid,IonRow,IonCol,IonCard,IonCardContent,IonImg,IonSearchbar, NgFor,  ExploreContainerComponent],
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonGrid,IonRow,IonCol,IonCard,IonCardContent,IonImg,IonSearchbar,IonSpinner, NgFor,  ExploreContainerComponent],
 })
 export class Tab1Page implements OnInit{
   libros: any[] = [];
+  cargando = false;
+  mensajeError = '';
   constructor(private booksService: BooksService,private cdr: ChangeDetectorRef) {}
   ngOnInit(): void {
     this.cargarLibros();
+  } 
+cargarLibros() {
+  this.consultarLibros('Harry Potter');
+}
+buscarLibros(event: any) {
+  const texto = event.detail.value?.trim() || '';
+  if (!texto) {
+    this.cargarLibros();
+    return;
   }
-  cargarLibros(){
-     this.booksService.buscarLibros('Harry Potter').subscribe({
+  this.consultarLibros(texto);
+}
+consultarLibros(texto: string) {
+  this.cargando = true;
+  this.mensajeError = '';
+  this.libros = [];
+  this.booksService.buscarLibros(texto).subscribe({
     next: (respuesta) => {
       this.libros = respuesta.docs || [];
-
-      console.log('Libros recibidos:', this.libros.length);
-
+      this.cargando = false;
       this.cdr.detectChanges();
     },
     error: (error) => {
-      console.error('Error al cargar libros:', error);
+      console.error('Error al consultar libros:', error);
+
+      this.mensajeError = 'No se pudieron cargar los libros. Intentá nuevamente.';
+      this.cargando = false;
+      this.cdr.detectChanges();
     }
   });
-  } 
+}
   obtenerPortada(libro: any): string {
     if(libro.cover_i){
        return `https://covers.openlibrary.org/b/id/${libro.cover_i}-M.jpg`;
     }
     return 'assets/icon/favicon.png';
   }
-
-buscarLibros(event: any) {
-  const texto = event.detail.value?.trim();
-  if (!texto) {
-    this.cargarLibros();
-    return;
-  }
-  this.booksService.buscarLibros(texto).subscribe({
-    next: (respuesta) => {
-      this.libros = respuesta.docs || [];
-      this.cdr.detectChanges();
-    },
-    error: (error) => {
-      console.error('Error al buscar libros:', error);
-    }
-  });
-}
 }

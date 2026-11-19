@@ -9,6 +9,17 @@
   [debounce]="500"
   (ionInput)="buscarLibros($event)">
 </ion-searchbar>
+<div class="estado" *ngIf="cargando">
+  <ion-spinner name="crescent"></ion-spinner>
+  <p>Cargando libros...</p>
+</div>
+<div class="estado" *ngIf="mensajeError">
+  <p>{{ mensajeError }}</p>
+</div>
+<div class="estado"
+     *ngIf="!cargando && !mensajeError && libros.length === 0">
+  <p>No se encontraron libros.</p>
+</div>
   <ion-grid>
     <ion-row>
       <ion-col size="6" *ngFor="let libro of libros">
