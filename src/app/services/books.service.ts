@@ -20,4 +20,16 @@ export class BooksService {
             }
         );
     }
+    obtenerLibrosIniciales(): Observable<any>{
+        return this.http.get<any>(
+            `${this.apiUrl}/search.json`,
+            {
+                params: {
+                    q:'subject:fiction',
+                    sort:'trending',
+                    limit:'20'
+                }
+            }
+        );
+    }
 }

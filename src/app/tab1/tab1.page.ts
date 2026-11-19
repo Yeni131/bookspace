@@ -6,11 +6,12 @@ import { ExploreContainerComponent } from '../explore-container/explore-containe
 import { NgForm } from '@angular/forms';
 
 
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonGrid,IonRow,IonCol,IonCard,IonCardContent,IonImg,IonSearchbar,IonSpinner, NgFor,  ExploreContainerComponent],
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonGrid,IonRow,IonCol,IonCard,IonCardContent,IonImg,IonSearchbar,IonSpinner, NgFor,  NgIf, ExploreContainerComponent],
 })
 export class Tab1Page implements OnInit{
   libros: any[] = [];
@@ -20,9 +21,24 @@ export class Tab1Page implements OnInit{
   ngOnInit(): void {
     this.cargarLibros();
   } 
-cargarLibros() {
-  this.consultarLibros('Harry Potter');
-}
+  cargarLibros() {
+    this.cargando= true;
+    this,this.mensajeError = '';
+    this.libros = [];
+    this.booksService.obtenerLibrosIniciales().subscribe({
+      next: (respuesta) => {
+        this.libros = respuesta.docs || [];
+        this.cargando = false;
+        this.cdr.detectChanges();
+      },
+      error: (error) => {
+        console.error('Error al cargar libros:',error);
+        this.mensajeError = 'No se pudieron cargar los libros.';
+        this.cargando = false;
+        this.cdr.detectChanges();
+      }
+    });
+  }
 buscarLibros(event: any) {
   const texto = event.detail.value?.trim() || '';
   if (!texto) {
