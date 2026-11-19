@@ -1,39 +1,73 @@
 import { Component } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
-import { IonHeader, IonToolbar, IonTitle, IonContent,IonSegment,IonSegmentButton,IonLabel,IonGrid,IonRow,IonCol,IonCard,IonCardContent,IonImg,IonSelect,IonSelectOption,IonButton,IonIcon} from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
+import {  IonHeader,  IonToolbar,IonTitle,  IonContent,  IonSegment,  IonSegmentButton,  IonLabel,  IonGrid,  IonRow,  IonCol,IonCard,IonCardContent,IonImg,IonSelect,IonSelectOption,IonButton,IonIcon,AlertController} from '@ionic/angular';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
-import { BibliotecaService, LibroGuardado, CategoriaLectura } from '../services/biblioteca.service';
+import {BibliotecaService,LibroGuardado,CategoriaLectura} from '../services/biblioteca.service';
 import { addIcons } from 'ionicons';
-import { trashOutline } from 'ionicons/icons';
+import { trashOutline, libraryOutline } from 'ionicons/icons';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonSegment, IonSegmentButton,IonLabel,IonGrid,IonRow,IonCol,IonCard,IonCardContent,IonImg, FormsModule,NgFor,NgIf,IonSelect,IonSelectOption,IonButton,IonIcon],
+  imports: [
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonSegment,
+    IonSegmentButton,
+    IonLabel,
+    IonGrid,
+    IonRow,
+    IonCol,
+    IonCard,
+    IonCardContent,
+    IonImg,
+    IonSelect,
+    IonSelectOption,
+    IonButton,
+    IonIcon,
+    NgFor,
+    NgIf
+  ]
 })
 export class Tab2Page {
-  categoriaSeleccionada = 'quiero-leer';
+  categoriaSeleccionada: CategoriaLectura = 'quiero-leer';
   librosGuardados: LibroGuardado[] = [];
-  constructor(private bibliotecaService: BibliotecaService, private router: Router,private alertController: AlertController) {addIcons({ trashOutline });}
-  ionViewWillEnter(): void{
+  constructor(
+    private bibliotecaService: BibliotecaService,
+    private router: Router,
+    private alertController: AlertController
+  ) {
+    addIcons({ trashOutline, libraryOutline });
+  }
+  ionViewWillEnter(): void {
     this.cargarLibros();
   }
-  cargarLibros(): void{
+  cargarLibros(): void {
     this.librosGuardados = this.bibliotecaService.obtenerLibros();
   }
-  obtenerLibrosPorCategoria(): LibroGuardado[]{
+  cambiarCategoriaSeleccionada(event: CustomEvent): void {
+    const categoria = event.detail.value as CategoriaLectura;
+    if (categoria) {
+      this.categoriaSeleccionada = categoria;
+    }
+  }
+  obtenerLibrosPorCategoria(): LibroGuardado[] {
     return this.librosGuardados.filter(
       libro => libro.categoria === this.categoriaSeleccionada
     );
   }
-  verDetalle( libro: LibroGuardado): void{
-    this.router.navigate(['/libro', libro.id])
+  contarLibrosPorCategoria(): number {
+    return this.obtenerLibrosPorCategoria().length;
   }
-  cambiarCategoria(libro: LibroGuardado,event: CustomEvent): void{
+  verDetalle(libro: LibroGuardado): void {
+    this.router.navigate(['/libro', libro.id]);
+  }
+  cambiarCategoria(libro: LibroGuardado, event: CustomEvent): void {
     const nuevaCategoria = event.detail.value as CategoriaLectura;
-    if(!nuevaCategoria || nuevaCategoria === libro.categoria){
+
+    if (!nuevaCategoria || nuevaCategoria === libro.categoria) {
       return;
     }
     this.bibliotecaService.guardarLibro({
@@ -42,19 +76,19 @@ export class Tab2Page {
     });
     this.cargarLibros();
   }
-  async eliminarLibro(libro: LibroGuardado): Promise<void>{
+  async eliminarLibro(libro: LibroGuardado): Promise<void> {
     const alerta = await this.alertController.create({
       header: 'Eliminar libro',
-      message:`¿Querés eliminar "${libro.titulo}" de tu biblioteca?`,
+      message: `¿Querés eliminar "${libro.titulo}" de tu biblioteca?`,
       buttons: [
         {
-          text:'Cancelar',
-          role:'cancel'
+          text: 'Cancelar',
+          role: 'cancel'
         },
         {
           text: 'Eliminar',
           role: 'destructive',
-          handler:() =>{
+          handler: () => {
             this.bibliotecaService.eliminarLibro(libro.id);
             this.cargarLibros();
           }
