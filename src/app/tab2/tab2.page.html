@@ -13,38 +13,35 @@
   <div class="ion-padding">
     <h2>Mis Lecturas</h2>
     <p>Organiza tus libros y lleva un registro de tus lecturas.</p>
-    
-<ion-segment
-  [(ngModel)]="categoriaSeleccionada">
-
-  <ion-segment-button value="quiero-leer">
-    <ion-label>Quiero leer</ion-label>
-  </ion-segment-button>
-
-  <ion-segment-button value="leyendo">
+  <ion-segment
+    [(ngModel)]="categoriaSeleccionada">
+   <ion-segment-button value="quiero-leer">
+      <ion-label>Quiero leer</ion-label>
+     </ion-segment-button>
+   <ion-segment-button value="leyendo">
     <ion-label>Leyendo</ion-label>
-  </ion-segment-button>
-
-  <ion-segment-button value="leidos">
-    <ion-label>Leídos</ion-label>
-  </ion-segment-button>
-
-</ion-segment>
-
-<div class="ion-padding ion-text-center">
-
-  @if (categoriaSeleccionada === 'quiero-leer') {
-    <p>Todavía no tenés libros que quieras leer.</p>
-  }
-
-  @if (categoriaSeleccionada === 'leyendo') {
-    <p>Todavía no estás leyendo ningún libro.</p>
-  }
-
-  @if (categoriaSeleccionada === 'leidos') {
-    <p>Todavía no terminaste ningún libro.</p>
-  }
-
-  </div>
+   </ion-segment-button>
+   <ion-segment-button value="leidos">
+      <ion-label>Leídos</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+<div class="ion-padding ion-text-center" *ngIf="obtenerLibrosPorCategoria().length === 0">
+  <p>Todavía no tenés libros en esta categoría.</p>
+</div>
+<ion-grid>
+  <ion-row>
+    <ion-col size="6" size-md="4" size-lg="3" *ngFor="let libro of obtenerLibrosPorCategoria()">
+      <ion-card button="true"(click)="verDetalle(libro)">
+        <ion-img
+          [src]="libro.portada"
+          [alt]="libro.titulo">
+        </ion-img>
+        <ion-card-content>
+          <h2>{{ libro.titulo }}</h2>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
   </div>
 </ion-content>
