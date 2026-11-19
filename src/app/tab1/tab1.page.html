@@ -1,9 +1,13 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Explorar Libros</ion-title>
+    <ion-title>BookSpace</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
+<div class="bienvenida">
+  <h1>Descubrí tu próxima lectura</h1>
+  <p>Explorá historias y encontrá tu próximo libro favorito.</p>
+</div>
 <ion-searchbar
   placeholder="Buscar libros por título..."
   [debounce]="500"
@@ -22,7 +26,7 @@
 </div>
   <ion-grid>
     <ion-row>
-      <ion-col size="6" *ngFor="let libro of libros">
+      <ion-col size="6"size-md="4"size-lg="3"*ngFor="let libro of libros">
         <ion-card  button="true" (click)="verDetalle(libro)">
           <ion-img
             [src]="obtenerPortada(libro)"

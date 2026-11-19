@@ -1,32 +1,41 @@
 .portada {
-  max-width: 210px;
-  margin: 25px auto;
+  max-width: 220px;
+  margin: 28px auto;
 }
 .portada ion-img {
   width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(69, 38, 48, 0.16);
 }
 h1 {
-  font-size: 24px;
+  font-family: Georgia, serif;
+  font-size: 26px;
   font-weight: bold;
+  color: #773c4d;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 22px;
 }
 .fecha {
   text-align: center;
-  color: var(--ion-color-medium);
+  color: #88777d;
   font-size: 14px;
 }
 h2 {
-  font-size: 19px;
+  font-family: Georgia, serif;
+  font-size: 20px;
   font-weight: bold;
-  margin-top: 30px;
+  color: #773c4d;
+  margin-top: 32px;
 }
 .descripcion {
   font-size: 15px;
-  line-height: 1.7;
+  line-height: 1.8;
+  color: #292127;
   white-space: pre-line;
 }
 .estado {
   text-align: center;
   padding: 35px 15px;
+  color: #88777d;
 }
