@@ -31,13 +31,29 @@
 <ion-grid>
   <ion-row>
     <ion-col size="6" size-md="4" size-lg="3" *ngFor="let libro of obtenerLibrosPorCategoria()">
-      <ion-card button="true"(click)="verDetalle(libro)">
+      <ion-card>
         <ion-img
           [src]="libro.portada"
-          [alt]="libro.titulo">
+          [alt]="libro.titulo"
+          (click)="verDetalle(libro)">
         </ion-img>
         <ion-card-content>
           <h2>{{ libro.titulo }}</h2>
+          <ion-select label="Estado de lectura"
+            label-placement="stacked"
+            interface="popover"
+            [value]="libro.categoria"
+            (ionChange)="cambiarCategoria(libro, $event)">
+          <ion-select-option value="quiero-leer">
+            Quiero Leer
+          </ion-select-option>
+          <ion-select-option value="leyendo">
+            Leyendo
+          </ion-select-option>
+          <ion-select-option value="leidos">
+            Leídos
+          </ion-select-option>
+          </ion-select>
         </ion-card-content>
       </ion-card>
     </ion-col>
