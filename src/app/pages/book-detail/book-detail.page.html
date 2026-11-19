@@ -29,8 +29,7 @@
         label="Estado de lectura"
         label-placement="stacked"
         interface="popover"
-        [value]="categoriaSeleccionada"
-        (ionChange)="cambiarCategoria($event)">
+        [(ngModel)]="categoriaSeleccionada">
         <ion-select-option value="quiero-leer">
           Quiero leer
         </ion-select-option>

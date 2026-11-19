@@ -1,6 +1,7 @@
 import {Component,OnInit,ChangeDetectorRef} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import {IonHeader,IonToolbar,IonTitle,IonContent,IonButtons,IonBackButton,IonImg,IonSpinner,IonButton,IonSelect,IonSelectOption} from '@ionic/angular';
 import { BooksService } from '../../services/books.service';
 import {BibliotecaService,CategoriaLectura} from '../../services/biblioteca.service';
@@ -10,7 +11,7 @@ import {BibliotecaService,CategoriaLectura} from '../../services/biblioteca.serv
   templateUrl: './book-detail.page.html',
   styleUrls: ['./book-detail.page.scss'],
   standalone: true,
-  imports: [NgIf,IonHeader,IonToolbar,IonTitle,IonContent,IonButtons,IonBackButton,IonImg,IonSpinner,IonButton,IonSelect,IonSelectOption]
+  imports: [NgIf,IonHeader,IonToolbar,IonTitle,IonContent,IonButtons,IonBackButton,IonImg,IonSpinner,IonButton,IonSelect,IonSelectOption,FormsModule]
 })
 export class BookDetailPage implements OnInit {
   libro: any = null;
@@ -68,10 +69,7 @@ export class BookDetailPage implements OnInit {
   obtenerAnio(): string {
     return this.libro?.first_publish_date || 'No disponible';
   }
-  cambiarCategoria(event: CustomEvent): void {
-    this.categoriaSeleccionada =
-      event.detail.value as CategoriaLectura;
-  }
+  
   guardarEnBiblioteca(): void {
     if (!this.libro || !this.idLibro) {
       return;
