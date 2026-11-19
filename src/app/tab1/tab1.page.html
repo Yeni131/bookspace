@@ -4,30 +4,31 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-<div class="bienvenida">
-  <h1>Descubrí tu próxima lectura</h1>
-  <p>Explorá historias y encontrá tu próximo libro favorito.</p>
-</div>
-<ion-searchbar
-  placeholder="Buscar libros por título..."
-  [debounce]="500"
-  (ionInput)="buscarLibros($event)">
-</ion-searchbar>
-<div class="estado" *ngIf="cargando">
-  <ion-spinner name="crescent"></ion-spinner>
-  <p>Cargando libros...</p>
-</div>
-<div class="estado" *ngIf="mensajeError">
-  <p>{{ mensajeError }}</p>
-</div>
-<div class="estado"
-     *ngIf="!cargando && !mensajeError && libros.length === 0">
-  <p>No se encontraron libros.</p>
-</div>
+  <div class="bienvenida">
+    <h1>Descubrí tu próxima lectura</h1>
+    <p>Explorá historias y encontrá tu próximo libro favorito.</p>
+  </div>
+  <ion-searchbar
+    placeholder="Buscar libros por título..."
+    [debounce]="500"
+    (ionInput)="buscarLibros($event)">
+  </ion-searchbar>
+  <div class="estado" *ngIf="cargando">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Cargando libros...</p>
+  </div>
+  <div class="estado" *ngIf="mensajeError">
+    <p>{{ mensajeError }}</p>
+  </div>
+  <div
+    class="estado"
+    *ngIf="!cargando && !mensajeError && libros.length === 0">
+    <p>No se encontraron libros.</p>
+  </div>
   <ion-grid>
     <ion-row>
-      <ion-col size="6"size-md="4"size-lg="3"*ngFor="let libro of libros">
-        <ion-card  button="true" (click)="verDetalle(libro)">
+      <ion-col size="6" size-md="4" size-lg="3" *ngFor="let libro of libros">
+        <ion-card button="true" (click)="verDetalle(libro)">
           <ion-img
             [src]="obtenerPortada(libro)"
             [alt]="libro.title">
