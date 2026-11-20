@@ -53,5 +53,38 @@
     <p class="descripcion">
       {{ obtenerDescripcion() }}
     </p>
+    
+<div class="resenas">
+  <h2>Mi reseña</h2>
+
+  <p>Calificá este libro:</p>
+
+  <div class="calificacion">
+    <ion-button
+      *ngFor="let estrella of [1, 2, 3, 4, 5]"
+      fill="clear"
+      (click)="calificacion = estrella">
+      <ion-icon
+        [name]="estrella <= calificacion ? 'star' : 'star-outline'">
+      </ion-icon>
+    </ion-button>
+  </div>
+
+  <ion-textarea
+    label="Tu opinión"
+    label-placement="stacked"
+    placeholder="Escribí qué te pareció este libro..."
+    [autoGrow]="true"
+    [(ngModel)]="comentario">
+  </ion-textarea>
+  <ion-button
+    expand="block"
+    (click)="guardarResena()">
+    Guardar reseña
+  </ion-button>
+  <p *ngIf="mensajeResena">
+    {{ mensajeResena }}
+  </p>
+</div>
   </div>
 </ion-content>

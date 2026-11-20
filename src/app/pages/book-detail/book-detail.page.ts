@@ -1,17 +1,19 @@
 import {Component,OnInit,ChangeDetectorRef} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NgIf } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import {IonHeader,IonToolbar,IonTitle,IonContent,IonButtons,IonBackButton,IonImg,IonSpinner,IonButton,IonSelect,IonSelectOption} from '@ionic/angular';
+import { NgIf,NgFor } from '@angular/common';
+import { FormsModule, NgForm } from '@angular/forms';
+import {IonHeader,IonToolbar,IonTitle,IonContent,IonButtons,IonBackButton,IonImg,IonSpinner,IonButton,IonSelect,IonSelectOption, IonText, IonTextarea, IonIcon} from '@ionic/angular';
 import { BooksService } from '../../services/books.service';
 import {BibliotecaService,CategoriaLectura} from '../../services/biblioteca.service';
-
+import { ResenasService } from '../../services/resenas.service';
+import { addIcons } from 'ionicons';
+import { star, starOutline } from 'ionicons/icons';
 @Component({
   selector: 'app-book-detail',
   templateUrl: './book-detail.page.html',
   styleUrls: ['./book-detail.page.scss'],
   standalone: true,
-  imports: [NgIf,IonHeader,IonToolbar,IonTitle,IonContent,IonButtons,IonBackButton,IonImg,IonSpinner,IonButton,IonSelect,IonSelectOption,FormsModule]
+  imports: [NgIf,IonHeader,IonToolbar,IonTitle,IonContent,IonButtons,IonBackButton,IonImg,IonSpinner,IonButton,IonSelect,IonSelectOption,FormsModule,NgFor,IonTextarea,IonIcon]
 })
 export class BookDetailPage implements OnInit {
   libro: any = null;
@@ -20,7 +22,10 @@ export class BookDetailPage implements OnInit {
   mensajeBiblioteca = '';
   idLibro = '';
   categoriaSeleccionada: CategoriaLectura = 'quiero-leer';
-  constructor(private route: ActivatedRoute,private booksService: BooksService,private bibliotecaService: BibliotecaService,private cdr: ChangeDetectorRef) {}
+  calificacion=0;
+  comentario='';
+  mensajeResena='';
+  constructor(private route: ActivatedRoute,private booksService: BooksService,private bibliotecaService: BibliotecaService,private resenasService: ResenasService,private cdr: ChangeDetectorRef) { addIcons({ star, starOutline });}
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
@@ -42,6 +47,11 @@ export class BookDetailPage implements OnInit {
         if (guardado) {
           this.categoriaSeleccionada = guardado.categoria;
           this.mensajeBiblioteca = 'Este libro ya está en tu biblioteca.';
+        }
+        const resenaGuardada=this.resenasService.obtenerResenaLibro(id);
+        if(resenaGuardada){
+          this.calificacion=resenaGuardada.calificacion;
+          this.comentario=resenaGuardada.comentario;
         }
         this.cdr.detectChanges();
       },
@@ -81,5 +91,26 @@ export class BookDetailPage implements OnInit {
       categoria: this.categoriaSeleccionada
     });
     this.mensajeBiblioteca = 'Libro guardado en Mi Biblioteca.';
+  }
+  guardarResena(): void{
+    if(!this.libro||!this.idLibro){
+      return;
+    }
+    if(this.calificacion<1||this.calificacion>5){
+      this.mensajeResena='Seleccioná una Calificacion de 1 a 5 estrellas.';
+      return;
+    }
+    if(!this.comentario.trim()){
+      this.mensajeResena='Escribí una reseña antes de guardar.';
+      return;
+    }
+    this.resenasService.guardarResena({
+      idLibro:this.idLibro,
+      tituloLibro:this.libro.title,
+      calificacion:this.calificacion,
+      comentario:this.comentario.trim()
+    });
+    this.mensajeResena ='¡Reseña guardada correctamente!';
+    this.cdr.detectChanges();
   }
 }
