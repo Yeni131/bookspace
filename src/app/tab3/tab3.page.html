@@ -1,23 +1,30 @@
-
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Mi Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true">
-
   <div class="perfil-container">
-
     <div class="perfil-header">
       <div class="avatar">
         <ion-icon name="person-circle-outline"></ion-icon>
       </div>
-
       <h2>Lectora BookSpace</h2>
       <p>Mi espacio de lectura</p>
     </div>
-
   </div>
-
+  <div class="estadisticas">
+    <div class="estadistica">
+      <h3>{{totalGuardados}}</h3>
+      <p>Guardados</p>
+    </div>
+    <div class="estadistica">
+      <h3>{{totalLeyendo}}</h3>
+      <p>Leyendo</p>
+    </div>
+    <div class="estadistica">
+      <h3>{{totalLeidos}}</h3>
+      <p>Leidos</p>
+    </div>
+  </div>
 </ion-content>
