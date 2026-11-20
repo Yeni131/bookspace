@@ -27,4 +27,18 @@
       <p>Leidos</p>
     </div>
   </div>
+  <div class="mis-resenas">
+    <h2>Mis Reseñas</h2>
+    <div *ngIf="misResenas.length===0">
+      <p>Todavia no escribiste ninguna reseña.</p>
+    </div>
+    <div class="resena-card" *ngFor="let resena of misResenas">
+      <h3>{{resena.tituloLibro}}</h3>
+      <p class="estrellas">
+        <span *ngFor="let estrella of [1,2,3,4,5]">
+          {{estrella <= resena.calificacion ? '★' : '☆'}}
+        </span>
+      </p>
+    </div>
+  </div>
 </ion-content>

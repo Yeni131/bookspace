@@ -1,17 +1,13 @@
-
 ion-content {
   --background: #f8f4ee;
 }
-
 ion-toolbar {
   --background: #f8f4ee;
   --color: #5c4033;
 }
-
 .perfil-container {
   padding: 24px 20px;
 }
-
 .perfil-header {
   display: flex;
   flex-direction: column;
@@ -22,7 +18,6 @@ ion-toolbar {
   border-radius: 18px;
   border: 1px solid #e8ddd0;
 }
-
 .avatar {
   display: flex;
   align-items: center;
@@ -38,16 +33,48 @@ ion-toolbar {
     font-size: 75px;
   }
 }
-
 .perfil-header h2 {
   font-size: 22px;
   font-weight: 600;
   color: #5c4033;
   margin: 0 0 8px;
 }
-
 .perfil-header p {
   font-size: 14px;
   color: #8d7768;
   margin: 0;
+}
+.mis-resenas{
+  margin: 24px 20px;
+}
+.mis-resenas h2{
+  font-size: 20px;
+  font-weight: 600;
+  color:#5c4033;
+  margin-bottom: 16px;
+}
+.resena-card{
+  background: #fffdf9;
+  border: 1px solid #e8ddd0;
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 15px;
+}
+.resena-card h3{
+  font-size: 17px;
+  font-weight: 600;
+  color: #5c4033;
+  margin: 0 0 10px;
+}
+.estrellas{
+  color: #c49a52;
+  font-size: 23px;
+  margin: 8px 0;
+}
+.resena-card p{
+  line-height: 1.5;
+}
+.resena-card p:last-child{
+  color: #70594b;
+  font-size: 14px;
 }
