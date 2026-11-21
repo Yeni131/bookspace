@@ -26,6 +26,23 @@
         {{ obtenerLibrosPorCategoria().length }} libros
       </span>
     </div>
+    <div class="biblioteca-ordanamiento">
+      <ion-select label="Ordenar libros por"
+        label-placement="stacked"
+        interface="popover"
+        [value]="ordenSeleccionado"
+        (ionChange)="cambiarOrden($event)">
+        <ion-select-option value="recientes">
+          Últimos agregados
+        </ion-select-option>
+        <ion-select-option value="titulo-asc">
+          Título (A-Z)
+        </ion-select-option>
+        <ion-select-option value="titulo-desc">
+          Título (Z-A)
+      </ion-select-option>
+      </ion-select>
+    </div>
     <div class="biblioteca-vacia" *ngIf="obtenerLibrosPorCategoria().length === 0">
       <ion-icon name="library-outline"></ion-icon>
       <h3>Tu biblioteca está vacía</h3>

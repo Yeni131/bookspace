@@ -9,31 +9,11 @@ import { trashOutline, libraryOutline } from 'ionicons/icons';
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
-  imports: [
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
-    IonSegment,
-    IonSegmentButton,
-    IonLabel,
-    IonGrid,
-    IonRow,
-    IonCol,
-    IonCard,
-    IonCardContent,
-    IonImg,
-    IonSelect,
-    IonSelectOption,
-    IonButton,
-    IonIcon,
-    NgFor,
-    NgIf
-  ]
-})
+  imports: [IonHeader,IonToolbar,IonTitle,IonContent,IonSegment,IonSegmentButton,IonLabel,IonGrid,IonRow,IonCol,IonCard,IonCardContent,IonImg,IonSelect,IonSelectOption,IonButton,IonIcon,NgFor,NgIf]})
 export class Tab2Page {
   categoriaSeleccionada: CategoriaLectura = 'quiero-leer';
   librosGuardados: LibroGuardado[] = [];
+  ordenSeleccionado:string ='recientes';
   constructor(
     private bibliotecaService: BibliotecaService,
     private router: Router,
@@ -53,10 +33,27 @@ export class Tab2Page {
       this.categoriaSeleccionada = categoria;
     }
   }
+  cambiarOrden(event:CustomEvent):void{
+    const nuevoOrden = event.detail.value;
+    if(nuevoOrden){
+      this.ordenSeleccionado=nuevoOrden;
+    }
+  }
   obtenerLibrosPorCategoria(): LibroGuardado[] {
-    return this.librosGuardados.filter(
+    const libros = this.librosGuardados.filter(
       libro => libro.categoria === this.categoriaSeleccionada
     );
+    if (this.ordenSeleccionado === 'titulo-asc') {
+      return libros.sort((a, b) =>
+        a.titulo.localeCompare(b.titulo, 'es')
+      );
+    }
+    if (this.ordenSeleccionado === 'titulo-desc') {
+      return libros.sort((a, b) =>
+        b.titulo.localeCompare(a.titulo, 'es')
+      );
+    }
+    return libros.reverse();
   }
   contarLibrosPorCategoria(): number {
     return this.obtenerLibrosPorCategoria().length;
