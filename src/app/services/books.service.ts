@@ -31,6 +31,26 @@ export class BooksService {
             }
         );
     }
+    obtenerLibrosPorCategoria(categoria:string): Observable<any> {
+        const categorias: {[key:string]:string}={
+            romance:'romance',
+            fantasia:'fantasy',
+            misterio:'mystery',
+            terror:'horror',
+            clasicos:'classic',
+            ciencia_ficcion:'science_fiction'
+        };
+        const genero=categorias[categoria];
+            return this.http.get<any>(
+        `${this.apiUrl}/search.json`,
+        {
+        params: {
+            q: `subject:${genero} language:spa`,
+            limit: '20'
+        }
+        }
+    );
+    }
     obtenerDetalleLibro(id: string): Observable<any> {
     return this.http.get<any>(
     `${this.apiUrl}/works/${id}.json`

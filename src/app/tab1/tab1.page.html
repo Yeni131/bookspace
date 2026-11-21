@@ -48,6 +48,19 @@
     *ngIf="!cargando && !mensajeError && libros.length === 0">
     <p>No se encontraron libros.</p>
   </div>
+  <div class="categorias">
+    <h2 *ngIf="!categoriaSeleccionada"> Recomendados en español</h2>
+    <h2 *ngIf="categoriaSeleccionada">
+       {{ categoriaSeleccionada === 'fantasia' ? 'Fantasía' :
+          categoriaSeleccionada === 'ciencia_ficcion' ? 'Ciencia ficción' :
+          categoriaSeleccionada === 'clasicos' ? 'Clásicos' :
+          categoriaSeleccionada === 'romance' ? 'Romance' :
+          categoriaSeleccionada === 'misterio' ? 'Misterio' : 'Terror' }}
+    </h2>
+    <button *ngIf="categoriaSeleccionada" class="volver-recomendados" type="button" (click)="volverARecomendados()">
+      ← Volver a recomendados
+    </button>
+  </div>
   <ion-grid>
     <ion-row>
       <ion-col size="6" size-md="4" size-lg="3" *ngFor="let libro of libros">

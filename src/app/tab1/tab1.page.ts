@@ -14,8 +14,32 @@ export class Tab1Page implements OnInit {
   libros: any[] = [];
   cargando = false;
   mensajeError = '';
+  categoriaSeleccionada:string | null=null;
   constructor(private booksService: BooksService,private cdr: ChangeDetectorRef,private router: Router) {}
   ngOnInit(): void {
+    this.cargarLibros();
+  }
+  seleccionarCategoria(categoria:string): void{
+    this.categoriaSeleccionada=categoria;
+    this.cargando=true;
+    this.mensajeError='';
+    this.libros=[];
+    this.booksService.obtenerLibrosPorCategoria(categoria).subscribe({
+      next:(respuesta)=>{
+        this.libros=respuesta.docs|| [];
+        this.cargando=false;
+        this.cdr.detectChanges();
+      },
+      error:(error)=>{
+        console.error('Error al cargar categoria:',error);
+        this.mensajeError='No se pudieron cargar los libros de esta categoria.';
+        this.cargando=false;
+        this.cdr.detectChanges();
+      }
+    });
+  }
+  volverARecomendados():void{
+    this.categoriaSeleccionada=null;
     this.cargarLibros();
   }
   cargarLibros(): void {
