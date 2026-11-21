@@ -8,7 +8,7 @@ import {BibliotecaService,CategoriaLectura} from '../../services/biblioteca.serv
 import { ResenasService } from '../../services/resenas.service';
 import { ResenasComunidadService, ResenaComunidad } from '../../services/resenas-comunidad.service';
 import { addIcons } from 'ionicons';
-import { star, starOutline } from 'ionicons/icons';
+import { star, starOutline, heart,heartOutline } from 'ionicons/icons';
 @Component({
   selector: 'app-book-detail',
   templateUrl: './book-detail.page.html',
@@ -30,6 +30,8 @@ export class BookDetailPage implements OnInit {
   promedioComunidad = 0;
   cargandoResenasComunidad = false;
   mensajeErrorResenasComunidad = '';
+  esFavorito = false;
+  mensajeFavorito = '';
   constructor(
     private route: ActivatedRoute,
     private booksService: BooksService,
@@ -38,7 +40,7 @@ export class BookDetailPage implements OnInit {
     private resenasComunidadService: ResenasComunidadService,
     private cdr: ChangeDetectorRef
   ) {
-    addIcons({ star, starOutline });
+    addIcons({ star, starOutline,heart,heartOutline });
   }
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -61,6 +63,7 @@ export class BookDetailPage implements OnInit {
         if (guardado) {
           this.categoriaSeleccionada = guardado.categoria;
           this.mensajeBiblioteca = 'Este libro ya está en tu biblioteca.';
+          this.esFavorito = guardado.favorito === true;
         }
         const resenaGuardada=this.resenasService.obtenerResenaLibro(id);
         if(resenaGuardada){
@@ -140,6 +143,26 @@ export class BookDetailPage implements OnInit {
       categoria: this.categoriaSeleccionada
     });
     this.mensajeBiblioteca = 'Libro guardado en Mi Biblioteca.';
+  }
+  alternarFavorito(): void {
+    if (!this.idLibro) {
+      return;
+    }
+    const libroGuardado = this.bibliotecaService.obtenerLibro(this.idLibro);
+    if (!libroGuardado) {
+      this.mensajeFavorito = 'Primero guardá el libro en Mi Biblioteca.';
+      return;
+    }
+    const resultado = this.bibliotecaService.alternarFavorito(this.idLibro);
+    if (!resultado) {
+      this.mensajeFavorito = 'Ya seleccionaste 4 libros favoritos.';
+      return;
+    }
+    this.esFavorito = !this.esFavorito;
+    this.mensajeFavorito = this.esFavorito
+      ? '¡Libro agregado a tus favoritos!'
+      : 'Libro eliminado de tus favoritos.';
+    this.cdr.detectChanges();
   }
   guardarResena(): void{
     if(!this.libro||!this.idLibro){
