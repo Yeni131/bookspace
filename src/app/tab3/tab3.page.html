@@ -27,6 +27,18 @@
       <p>Leidos</p>
     </div>
   </div>
+  <div class="mis-favoritos">
+    <h2>Mis 4 libros favoritos</h2>
+    <p *ngIf="librosFavoritos.length === 0">
+      Todavía no seleccionaste libros favoritos.
+    </p>
+    <div class="favoritos-grid" *ngIf="librosFavoritos.length > 0">
+      <div class="favorito-card" *ngFor="let libro of librosFavoritos">
+        <img [src]="libro.portada" [alt]="libro.titulo">
+        <p>{{ libro.titulo }}</p>
+      </div>
+    </div>
+  </div>
   <div class="mis-resenas">
     <h2>Mis Reseñas</h2>
     <div *ngIf="misResenas.length===0">
