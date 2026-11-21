@@ -1,18 +1,22 @@
+
 [
   {
     "idLibro": "OL274505W",
+    "usuarioId": 1,
     "usuario": "Lucía",
     "calificacion": 5,
     "comentario": "Una historia maravillosa. Me encantó cómo Gabriel García Márquez mezcla la realidad con la fantasía. Macondo es inolvidable."
   },
   {
     "idLibro": "OL274505W",
+    "usuarioId": 2,
     "usuario": "Mateo",
     "calificacion": 4,
     "comentario": "Una novela increíble, aunque al principio me costó seguir la historia de la familia Buendía. Definitivamente vale la pena leerla."
   },
   {
     "idLibro": "OL274505W",
+    "usuarioId": 3,
     "usuario": "Sofía",
     "calificacion": 5,
     "comentario": "Uno de mis libros favoritos. La forma en que está narrada la historia es simplemente hermosa."
