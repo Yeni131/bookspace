@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 export interface ResenaComunidad {
   idLibro: string;
+  usuarioId: number;
   usuario: string;
   calificacion: number;
   comentario: string;
