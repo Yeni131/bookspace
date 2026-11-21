@@ -78,3 +78,40 @@ ion-card-content p {
     font-size: 24px;
   }
 }
+.categorias {
+  max-width: 1100px;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+.categorias h2 {
+  font-family: Georgia, serif;
+  font-size: 21px;
+  color: #6b4f3f;
+  margin-bottom: 16px;
+}
+.lista-categorias {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.categoria {
+  background: #ffffff;
+  border: 1px solid #eee7dc;
+  border-radius: 12px;
+  padding: 16px 12px;
+  text-align: center;
+  color: #6b4f3f;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.categoria:hover {
+  background: #f5eee6;
+  transform: translateY(-2px);
+}
+.categoria.activa {
+  background: #6b4f3f;
+  color: #ffffff;
+  border-color: #6b4f3f;
+}

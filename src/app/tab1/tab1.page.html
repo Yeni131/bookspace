@@ -13,6 +13,29 @@
     [debounce]="500"
     (ionInput)="buscarLibros($event)">
   </ion-searchbar>
+  <div class="categorias">
+    <h2>Explora por Categorias</h2>
+    <div class="lista-categorias">
+      <button class="categoria" type="button" [class.activa]="categoriaSeleccionada === 'romance'"(click)="seleccionarCategoria('romance')">
+       Romance
+    </button>
+    <button class="categoria" type="button" [class.activa]="categoriaSeleccionada === 'fantasia'"(click)="seleccionarCategoria('fantasia')">
+       Fantasía
+    </button>
+    <button class="categoria" type="button"[class.activa]="categoriaSeleccionada === 'misterio'"(click)="seleccionarCategoria('misterio')">
+       Misterio
+    </button>
+    <button class="categoria" type="button"[class.activa]="categoriaSeleccionada === 'terror'"(click)="seleccionarCategoria('terror')">
+       Terror
+    </button>
+    <button class="categoria" type="button" [class.activa]="categoriaSeleccionada === 'clasicos'"(click)="seleccionarCategoria('clasicos')">
+       Clásicos
+    </button>
+    <button class="categoria" type="button"[class.activa]="categoriaSeleccionada === 'ciencia_ficcion'"(click)="seleccionarCategoria('ciencia_ficcion')">
+       Ciencia ficción
+    </button>
+    </div>
+  </div>
   <div class="estado" *ngIf="cargando">
     <ion-spinner name="crescent"></ion-spinner>
     <p>Cargando libros...</p>
