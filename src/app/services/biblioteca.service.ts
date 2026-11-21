@@ -5,6 +5,7 @@ export interface LibroGuardado {
   titulo: string;
   portada: string;
   categoria: CategoriaLectura;
+  favorito?:boolean;
 }
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,11 @@ export class BibliotecaService {
       item => item.id === libro.id
     );
     if (indice >= 0) {
-      libros[indice] = libro;
+      libros[indice] = {
+        ...libros[indice],
+        ...libro,
+        favorito: libro.favorito ?? libros[indice].favorito
+      };
     } else {
       libros.push(libro);
     }
@@ -42,7 +47,6 @@ export class BibliotecaService {
       JSON.stringify(libros)
     );
   }
-
   obtenerPorCategoria(
     categoria: CategoriaLectura
   ): LibroGuardado[] {
@@ -50,7 +54,27 @@ export class BibliotecaService {
       libro => libro.categoria === categoria
     );
   }
-
+  obtenerFavoritos(): LibroGuardado[] {
+    return this.obtenerLibros().filter(
+      libro => libro.favorito === true
+    );
+  }
+  alternarFavorito(id: string): boolean {
+    const libros = this.obtenerLibros();
+    const libro = libros.find(item => item.id === id);
+    if (!libro) {
+      return false;
+    }
+    if (!libro.favorito && this.obtenerFavoritos().length >= 4) {
+      return false;
+    }
+    libro.favorito = !libro.favorito;
+    localStorage.setItem(
+      this.clave,
+      JSON.stringify(libros)
+    );
+    return true;
+  }
   eliminarLibro(id: string): void {
     const libros = this.obtenerLibros().filter(
       libro => libro.id !== id
