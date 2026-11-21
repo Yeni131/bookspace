@@ -27,7 +27,9 @@ export class BookDetailPage implements OnInit {
   comentario='';
   mensajeResena='';
   resenasComunidad: ResenaComunidad[] = [];
-  promedioComunidad=0;
+  promedioComunidad = 0;
+  cargandoResenasComunidad = false;
+  mensajeErrorResenasComunidad = '';
   constructor(
     private route: ActivatedRoute,
     private booksService: BooksService,
@@ -75,20 +77,28 @@ export class BookDetailPage implements OnInit {
         this.cdr.detectChanges();
       }
     });
-  }
+  } 
   cargarResenasComunidad(id: string): void {
     this.resenasComunidad = [];
+    this.promedioComunidad = 0;
+    this.cargandoResenasComunidad = true;
+    this.mensajeErrorResenasComunidad = '';
     this.resenasComunidadService.obtenerResenas().subscribe({
       next: (resenas) => {
         this.resenasComunidad = resenas.filter(
           resena => resena.idLibro === id
         );
         this.calcularPromedioComunidad();
+        this.cargandoResenasComunidad = false;
         this.cdr.detectChanges();
       },
       error: (error) => {
         console.error('Error al cargar reseñas de la comunidad:', error);
         this.resenasComunidad = [];
+        this.promedioComunidad = 0;
+        this.mensajeErrorResenasComunidad =
+          'No se pudieron cargar las reseñas de la comunidad.';
+        this.cargandoResenasComunidad = false;
         this.cdr.detectChanges();
       }
     });
