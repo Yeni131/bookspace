@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IonProgressBar } from '@ionic/angular';
 import { NgFor, NgIf } from '@angular/common';
 import {  IonHeader,  IonToolbar,IonTitle,  IonContent,  IonSegment,  IonSegmentButton,  IonLabel,  IonGrid,  IonRow,  IonCol,IonCard,IonCardContent,IonImg,IonSelect,IonSelectOption,IonButton,IonIcon,AlertController} from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -9,11 +10,12 @@ import { trashOutline, libraryOutline } from 'ionicons/icons';
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
-  imports: [IonHeader,IonToolbar,IonTitle,IonContent,IonSegment,IonSegmentButton,IonLabel,IonGrid,IonRow,IonCol,IonCard,IonCardContent,IonImg,IonSelect,IonSelectOption,IonButton,IonIcon,NgFor,NgIf]})
+  imports: [IonHeader,IonToolbar,IonTitle,IonContent,IonSegment,IonSegmentButton,IonLabel,IonGrid,IonRow,IonCol,IonCard,IonCardContent,IonImg,IonSelect,IonSelectOption,IonButton,IonIcon,NgFor,NgIf,IonProgressBar]})
 export class Tab2Page {
   categoriaSeleccionada: CategoriaLectura = 'quiero-leer';
   librosGuardados: LibroGuardado[] = [];
   ordenSeleccionado:string ='recientes';
+  metaLectura: number =12;
   constructor(
     private bibliotecaService: BibliotecaService,
     private router: Router,
@@ -23,9 +25,62 @@ export class Tab2Page {
   }
   ionViewWillEnter(): void {
     this.cargarLibros();
+    this.cargarMetaLectura();
   }
   cargarLibros(): void {
     this.librosGuardados = this.bibliotecaService.obtenerLibros();
+  }
+  cargarMetaLectura(): void{
+    const metaGuardada = localStorage.getItem('bookspace_meta_lectura');
+    if(metaGuardada!== null){
+      const meta= Number(metaGuardada);
+      if(Number.isInteger(meta)&& meta>0){
+        this.metaLectura=meta;
+      }
+    }
+  }
+  guardarMetaLectura(nuevaMeta:number):void{
+    if(!Number.isInteger(nuevaMeta)|| nuevaMeta<=0){
+      return;
+    }
+    this.metaLectura=nuevaMeta;
+    localStorage.setItem(
+      'bookspace_meta_lectura',
+      String(this.metaLectura)
+    );
+  }
+  async cambiarMetaLectura(): Promise<void> {
+    const alerta = await this.alertController.create({
+      header: 'Cambiar meta de lectura',
+      message: '¿Cuántos libros querés leer?',
+      inputs: [
+        {
+          name: 'meta',
+          type: 'number',
+          value: this.metaLectura,
+          min: 1,
+          placeholder: 'Ejemplo: 12'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'Guardar',
+          handler: (datos) => {
+            const nuevaMeta = Number(datos.meta);
+            if (!Number.isInteger(nuevaMeta) || nuevaMeta <= 0) {
+              return false;
+            }
+            this.guardarMetaLectura(nuevaMeta);
+            return true;
+          }
+        }
+      ]
+    });
+    await alerta.present();
   }
   cambiarCategoriaSeleccionada(event: CustomEvent): void {
     const categoria = event.detail.value as CategoriaLectura;
@@ -57,6 +112,17 @@ export class Tab2Page {
   }
   contarLibrosPorCategoria(): number {
     return this.obtenerLibrosPorCategoria().length;
+  }
+  obtenerLibrosLeidos(): number{
+    return this.librosGuardados.filter(
+      libro=> libro.categoria==='leidos'
+    ).length;
+  }
+  obtenerPorcentajeReto():number{
+    if(this.metaLectura<=0){
+      return 0;
+    }
+    return Math.min(100,Math.round((this.obtenerLibrosLeidos()/this.metaLectura)*100));
   }
   verDetalle(libro: LibroGuardado): void {
     this.router.navigate(['/libro', libro.id]);
