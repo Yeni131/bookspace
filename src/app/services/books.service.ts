@@ -1,4 +1,4 @@
-import { Injectable, Service } from '@angular/core';
+import { Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -45,7 +45,7 @@ export class BooksService {
         `${this.apiUrl}/search.json`,
         {
         params: {
-            q: `subject:${genero} language:spa`,
+            q: `subject:${genero}`,
             limit: '20'
         }
         }
