@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "nombre": "Lucía",
+    "usuario": "lucia_lee",
+    "biografia": "Amante de la literatura latinoamericana y de las historias que dejan huella.",
+    "avatar": "person-circle-outline"
+  },
+  {
+    "id": 2,
+    "nombre": "Mateo",
+    "usuario": "mateo_books",
+    "biografia": "Siempre buscando mi próxima lectura favorita.",
+    "avatar": "person-circle-outline"
+  },
+  {
+    "id": 3,
+    "nombre": "Sofía",
+    "usuario": "sofia_lectora",
+    "biografia": "Entre libros, café y mundos imaginarios.",
+    "avatar": "person-circle-outline"
+  }
+]
