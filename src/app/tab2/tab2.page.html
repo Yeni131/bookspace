@@ -9,6 +9,26 @@
       <h1>Mis Lecturas</h1>
       <p>Organizá tus libros y seguí tu progreso de lectura.</p>
     </div>
+    <div class="reto-lectura">
+      <h2>Reto de lectura 2026</h2>
+      <p>
+        Llevás {{ obtenerLibrosLeidos() }} de
+        {{ metaLectura }} libros leídos.
+      </p>
+      <p>
+        Progreso: {{ obtenerPorcentajeReto() }}%
+      </p>
+      <ion-progress-bar
+        [value]="obtenerPorcentajeReto() / 100"
+        color="success">
+      </ion-progress-bar>
+      <ion-button
+        expand="block"
+        fill="outline"
+        (click)="cambiarMetaLectura()">
+        Cambiar mi meta
+      </ion-button>
+    </div>
     <ion-segment [value]="categoriaSeleccionada" (ionChange)="cambiarCategoriaSeleccionada($event)">
       <ion-segment-button value="quiero-leer">
         <ion-label>Quiero leer</ion-label>
