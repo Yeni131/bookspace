@@ -6,6 +6,7 @@ import {IonHeader,IonToolbar,IonTitle,IonContent,IonButtons,IonBackButton,IonImg
 import { BooksService } from '../../services/books.service';
 import {BibliotecaService,CategoriaLectura} from '../../services/biblioteca.service';
 import { ResenasService } from '../../services/resenas.service';
+import { ResenasComunidadService, ResenaComunidad } from '../../services/resenas-comunidad.service';
 import { addIcons } from 'ionicons';
 import { star, starOutline } from 'ionicons/icons';
 @Component({
@@ -25,7 +26,17 @@ export class BookDetailPage implements OnInit {
   calificacion=0;
   comentario='';
   mensajeResena='';
-  constructor(private route: ActivatedRoute,private booksService: BooksService,private bibliotecaService: BibliotecaService,private resenasService: ResenasService,private cdr: ChangeDetectorRef) { addIcons({ star, starOutline });}
+  resenasComunidad: ResenaComunidad[] = [];
+  constructor(
+    private route: ActivatedRoute,
+    private booksService: BooksService,
+    private bibliotecaService: BibliotecaService,
+    private resenasService: ResenasService,
+    private resenasComunidadService: ResenasComunidadService,
+    private cdr: ChangeDetectorRef
+  ) {
+    addIcons({ star, starOutline });
+  }
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
@@ -53,12 +64,29 @@ export class BookDetailPage implements OnInit {
           this.calificacion=resenaGuardada.calificacion;
           this.comentario=resenaGuardada.comentario;
         }
+        this.cargarResenasComunidad(id);
         this.cdr.detectChanges();
       },
       error: (error) => {
         console.error('Error al cargar detalle:', error);
         this.mensajeError = 'No se pudo cargar el libro.';
         this.cargando = false;
+        this.cdr.detectChanges();
+      }
+    });
+  }
+  cargarResenasComunidad(id: string): void {
+    this.resenasComunidad = [];
+    this.resenasComunidadService.obtenerResenas().subscribe({
+      next: (resenas) => {
+        this.resenasComunidad = resenas.filter(
+          resena => resena.idLibro === id
+        );
+        this.cdr.detectChanges();
+      },
+      error: (error) => {
+        console.error('Error al cargar reseñas de la comunidad:', error);
+        this.resenasComunidad = [];
         this.cdr.detectChanges();
       }
     });
@@ -79,7 +107,6 @@ export class BookDetailPage implements OnInit {
   obtenerAnio(): string {
     return this.libro?.first_publish_date || 'No disponible';
   }
-  
   guardarEnBiblioteca(): void {
     if (!this.libro || !this.idLibro) {
       return;
