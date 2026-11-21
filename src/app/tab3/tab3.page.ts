@@ -1,7 +1,7 @@
 import { Component,ChangeDetectorRef } from '@angular/core';
 import { NgIf, NgFor } from '@angular/common';
 import {IonHeader,IonToolbar,IonTitle,IonContent,IonIcon} from '@ionic/angular';
-import { BibliotecaService } from '../services/biblioteca.service';
+import { BibliotecaService,LibroGuardado } from '../services/biblioteca.service';
 import { ResenasService,Resena } from '../services/resenas.service';
 import { addIcons } from 'ionicons';
 import { personCircleOutline } from 'ionicons/icons';
@@ -17,12 +17,14 @@ export class Tab3Page {
   totalLeyendo = 0;
   totalLeidos = 0;
   misResenas:Resena[]=[];
+  librosFavoritos: LibroGuardado[] = [];
   constructor(private bibliotecaService: BibliotecaService,private resenasService: ResenasService,private changeDetectorRef: ChangeDetectorRef) {
     addIcons({ personCircleOutline });
   }
   ionViewWillEnter(): void{
     this.cargarEstadisticas();
     this.cargarResenas();
+    this.cargarFavoritos();
   }
   cargarEstadisticas(): void{
     this.totalGuardados = this.bibliotecaService.obtenerLibros().length;
@@ -32,6 +34,10 @@ export class Tab3Page {
   }
   cargarResenas(): void{
     this.misResenas=this.resenasService.obtenerResenas();
+    this.changeDetectorRef.detectChanges();
+  }
+  cargarFavoritos(): void {
+    this.librosFavoritos = this.bibliotecaService.obtenerFavoritos();
     this.changeDetectorRef.detectChanges();
   }
 }
