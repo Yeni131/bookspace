@@ -14,7 +14,7 @@ export class BooksService {
             `${this.apiUrl}/search.json`,
             {
                 params: {
-                    q: texto,
+                    q: `${texto} language:spa`,
                     limit:'20'
                 }
             }
@@ -25,9 +25,8 @@ export class BooksService {
             `${this.apiUrl}/search.json`,
             {
                 params: {
-                    q:'subject:fiction',
-                    sort:'trending',
-                    limit:'20'
+                    q: 'title:"Cien años de soledad" OR title:"Don Quijote de la Mancha" OR title:"Rayuela" OR title:"La casa de los espíritus"',
+                    limit: '8'
                 }
             }
         );
