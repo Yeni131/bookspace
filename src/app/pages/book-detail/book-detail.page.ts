@@ -1,6 +1,6 @@
 import {Component,OnInit,ChangeDetectorRef} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NgIf,NgFor } from '@angular/common';
+import { NgIf,NgFor,DecimalPipe } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import {IonHeader,IonToolbar,IonTitle,IonContent,IonButtons,IonBackButton,IonImg,IonSpinner,IonButton,IonSelect,IonSelectOption, IonText, IonTextarea, IonIcon} from '@ionic/angular';
 import { BooksService } from '../../services/books.service';
@@ -14,7 +14,7 @@ import { star, starOutline } from 'ionicons/icons';
   templateUrl: './book-detail.page.html',
   styleUrls: ['./book-detail.page.scss'],
   standalone: true,
-  imports: [NgIf,IonHeader,IonToolbar,IonTitle,IonContent,IonButtons,IonBackButton,IonImg,IonSpinner,IonButton,IonSelect,IonSelectOption,FormsModule,NgFor,IonTextarea,IonIcon]
+  imports: [NgIf,IonHeader,IonToolbar,IonTitle,IonContent,IonButtons,IonBackButton,IonImg,IonSpinner,IonButton,IonSelect,IonSelectOption,FormsModule,NgFor,IonTextarea,IonIcon,DecimalPipe]
 })
 export class BookDetailPage implements OnInit {
   libro: any = null;
@@ -27,6 +27,7 @@ export class BookDetailPage implements OnInit {
   comentario='';
   mensajeResena='';
   resenasComunidad: ResenaComunidad[] = [];
+  promedioComunidad=0;
   constructor(
     private route: ActivatedRoute,
     private booksService: BooksService,
@@ -82,6 +83,7 @@ export class BookDetailPage implements OnInit {
         this.resenasComunidad = resenas.filter(
           resena => resena.idLibro === id
         );
+        this.calcularPromedioComunidad();
         this.cdr.detectChanges();
       },
       error: (error) => {
@@ -90,6 +92,16 @@ export class BookDetailPage implements OnInit {
         this.cdr.detectChanges();
       }
     });
+  }
+  calcularPromedioComunidad():void{
+    if(this.resenasComunidad.length===0){
+      this.promedioComunidad=0;
+      return;
+    }
+    const sumaCalificaciones = this.resenasComunidad.reduce(
+      (total,resena)=> total+resena.calificacion,0
+    );
+    this.promedioComunidad= sumaCalificaciones/this.resenasComunidad.length;
   }
   obtenerPortada(): string {
     if (this.libro?.covers?.length) {
