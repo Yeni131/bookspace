@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 export interface ResenaComunidad {
   idLibro: string;
   usuarioId: number;
@@ -15,7 +16,7 @@ export class ResenasComunidadService {
   constructor(private http: HttpClient) {}
   obtenerResenas(): Observable<ResenaComunidad[]> {
     return this.http.get<ResenaComunidad[]>(
-      'assets/resenas-comunidad.json'
+      environment.resenasComunidadUrl
     );
   }
 }
