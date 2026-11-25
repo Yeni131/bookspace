@@ -15,6 +15,7 @@ export class Tab1Page implements OnInit {
   cargando = false;
   mensajeError = '';
   categoriaSeleccionada:string | null=null;
+  busquedaActiva=false;
   constructor(private booksService: BooksService,private cdr: ChangeDetectorRef,private router: Router) {}
   ngOnInit(): void {
     this.cargarLibros();
@@ -62,7 +63,9 @@ export class Tab1Page implements OnInit {
   }
   buscarLibros(event: any): void {
     const texto = event.detail.value?.trim() || '';
+    this.busquedaActiva=texto.length>0;
     if (!texto) {
+      this.categoriaSeleccionada=null;
       this.cargarLibros();
       return;
     }

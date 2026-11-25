@@ -95,16 +95,17 @@ ion-card-content p {
   gap: 12px;
 }
 .categoria {
-  background: #ffffff;
-  border: 1px solid #eee7dc;
-  border-radius: 12px;
-  padding: 16px 12px;
+  background: #fffdf9;
+  border: 1px solid #e8ddd0;
+  border-radius: 16px;
+  padding: 18px 12px;
   text-align: center;
-  color: #6b4f3f;
+  color: #5c4033;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: 0.2s;
+  box-shadow: 0 3px 10px rgba(92, 64, 51, 0.05);
+  transition: background 0.2s ease,transform 0.2s ease,box-shadow 0.2s ease;
 }
 .categoria:hover {
   background: #f5eee6;
@@ -129,4 +130,19 @@ ion-card-content p {
 }
 .volver-recomendados:hover {
   background: #f5eee6;
+}
+ion-searchbar{
+  --background: #fffdf9;
+  --color: #5c4033;
+  --placeholder-color: #9b8778;
+  --ion-color:#795548;
+  --clear-button-color: #795548;
+  --border-radius: 14px;
+  max-width:1060px;
+  margin:12px auto 20px;
+  padding: 0 16px;
+}
+ion-searchbar::part(container){
+  border: 1px solid #e8ddd0;
+  box-shadow: 0 3px 10px rgba(92, 64, 51, 0.05);
 }

@@ -13,7 +13,7 @@
     [debounce]="500"
     (ionInput)="buscarLibros($event)">
   </ion-searchbar>
-  <div class="categorias">
+  <div class="categorias" *ngIf="!busquedaActiva">
     <h2>Explora por Categorias</h2>
     <div class="lista-categorias">
       <button class="categoria" type="button" [class.activa]="categoriaSeleccionada === 'romance'"(click)="seleccionarCategoria('romance')">
