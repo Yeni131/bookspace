@@ -2,13 +2,15 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
-import {  IonHeader,  IonToolbar,  IonTitle,  IonContent,  IonGrid,  IonRow,  IonCol,  IonCard,  IonCardContent,  IonImg,  IonSearchbar,  IonSpinner} from '@ionic/angular';
+import {  IonHeader,  IonToolbar,  IonTitle,  IonContent,  IonGrid,  IonRow,  IonCol,  IonCard,  IonCardContent,  IonImg,  IonSearchbar,  IonSpinner,IonIcon} from '@ionic/angular';
+import { addIcons } from 'ionicons';
+import {heartOutline,sparklesOutline,searchOutline,moonOutline,bookOutline,planetOutline} from 'ionicons/icons';
 import { BooksService } from '../services/books.service';
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
-  imports: [NgFor,NgIf,IonHeader,IonToolbar,IonTitle,IonContent,IonGrid,IonRow,IonCol,IonCard,IonCardContent,IonImg,IonSearchbar,IonSpinner]
+  imports: [NgFor,NgIf,IonHeader,IonToolbar,IonTitle,IonContent,IonGrid,IonRow,IonCol,IonCard,IonCardContent,IonImg,IonSearchbar,IonSpinner,IonIcon]
 })
 export class Tab1Page implements OnInit {
   libros: any[] = [];
@@ -16,7 +18,7 @@ export class Tab1Page implements OnInit {
   mensajeError = '';
   categoriaSeleccionada:string | null=null;
   busquedaActiva=false;
-  constructor(private booksService: BooksService,private cdr: ChangeDetectorRef,private router: Router) {}
+  constructor(private booksService: BooksService,private cdr: ChangeDetectorRef,private router: Router) {addIcons({heartOutline,sparklesOutline,searchOutline,moonOutline,bookOutline,planetOutline});}
   ngOnInit(): void {
     this.cargarLibros();
   }

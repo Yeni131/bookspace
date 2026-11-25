@@ -1,6 +1,8 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>BookSpace</ion-title>
+  <ion-toolbar class="toolbar-bookspace">
+    <ion-title>
+    <span class="logo-bookspace">✦ BookSpace ✦</span>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -17,22 +19,28 @@
     <h2>Explora por Categorias</h2>
     <div class="lista-categorias">
       <button class="categoria" type="button" [class.activa]="categoriaSeleccionada === 'romance'"(click)="seleccionarCategoria('romance')">
-       Romance
+         <ion-icon name="heart-outline"></ion-icon>
+         <span>Romance</span>
     </button>
     <button class="categoria" type="button" [class.activa]="categoriaSeleccionada === 'fantasia'"(click)="seleccionarCategoria('fantasia')">
-       Fantasía
+      <ion-icon name="sparkles-outline"></ion-icon>
+      <span>Fantasía</span>
     </button>
     <button class="categoria" type="button"[class.activa]="categoriaSeleccionada === 'misterio'"(click)="seleccionarCategoria('misterio')">
-       Misterio
+      <ion-icon name="search-outline"></ion-icon>
+       <span>Misterio</span>
     </button>
     <button class="categoria" type="button"[class.activa]="categoriaSeleccionada === 'terror'"(click)="seleccionarCategoria('terror')">
-       Terror
+      <ion-icon name="moon-outline"></ion-icon> 
+      <span>Terror</span>
     </button>
     <button class="categoria" type="button" [class.activa]="categoriaSeleccionada === 'clasicos'"(click)="seleccionarCategoria('clasicos')">
-       Clásicos
+      <ion-icon name="book-outline"></ion-icon> 
+      <span>Clásicos</span>
     </button>
     <button class="categoria" type="button"[class.activa]="categoriaSeleccionada === 'ciencia_ficcion'"(click)="seleccionarCategoria('ciencia_ficcion')">
-       Ciencia ficción
+      <ion-icon name="planet-outline"></ion-icon> 
+      <span>Ciencia Ficción</span>
     </button>
     </div>
   </div>
@@ -49,7 +57,9 @@
     <p>No se encontraron libros.</p>
   </div>
   <div class="categorias">
-    <h2 *ngIf="!categoriaSeleccionada"> Recomendados en español</h2>
+<h2 *ngIf="!categoriaSeleccionada">
+  {{ busquedaActiva ? 'Resultados de búsqueda' : 'Recomendados en español' }}
+</h2>
     <h2 *ngIf="categoriaSeleccionada">
        {{ categoriaSeleccionada === 'fantasia' ? 'Fantasía' :
           categoriaSeleccionada === 'ciencia_ficcion' ? 'Ciencia ficción' :
