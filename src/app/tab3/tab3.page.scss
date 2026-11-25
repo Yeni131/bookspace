@@ -13,24 +13,26 @@ ion-toolbar {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 30px 20px;
-  background: #fffdf9;
-  border-radius: 18px;
-  border: 1px solid #e8ddd0;
+  padding: 35px 20px;
+  background: #efe4d7;
+  border-radius: 20px;
+  border: 1px solid #e0d1c1;
+  box-shadow: 0 4px 15px rgba(92, 64, 51, 0.06);
 }
 .avatar {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100px;
-  height: 100px;
+  width: 105px;
+  height: 105px;
   border-radius: 50%;
-  background: #efe4d7;
+  background: #fffdf9;
   color: #795548;
-  margin-bottom: 15px;
-
+  margin-bottom: 18px;
+  border: 3px solid #d8c2ac;
+  box-shadow: 0 4px 12px rgba(92, 64, 51, 0.12);
   ion-icon {
-    font-size: 75px;
+    font-size: 80px;
   }
 }
 .perfil-header h2 {
@@ -56,20 +58,30 @@ ion-toolbar {
 .resena-card{
   background: #fffdf9;
   border: 1px solid #e8ddd0;
+  border-left: 4px solid #b89574;
   border-radius: 16px;
-  padding: 18px;
-  margin-bottom: 15px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(92, 64, 51, 0.06);
+  transition: transform 0.2d ease;
+}
+@media(hover: hover){
+  .resena-card:hover{
+    transform: translateY(-3px);
+  }
 }
 .resena-card h3{
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 600;
   color: #5c4033;
-  margin: 0 0 10px;
+  margin: 0 0 12px;
+  line-height: 1.4;
 }
 .estrellas{
   color: #c49a52;
   font-size: 23px;
-  margin: 8px 0;
+  margin: 8px 0 12px;
+  letter-spacing: 3px;
 }
 .resena-card p{
   line-height: 1.5;
@@ -77,46 +89,88 @@ ion-toolbar {
 .resena-card p:last-child{
   color: #70594b;
   font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 0;
 }
-
 .mis-favoritos {
   margin: 24px 20px;
 }
-
 .mis-favoritos h2 {
   font-size: 20px;
   font-weight: 600;
   color: #5c4033;
   margin-bottom: 16px;
 }
-
 .mis-favoritos > p {
   color: #8d7768;
   font-size: 14px;
 }
-
 .favoritos-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
+  gap: 14px;
+  margin-top: 18px;
 }
-
 .favorito-card {
   min-width: 0;
   text-align: center;
+  transition: trandlateY(-5px);
 }
-
+@media(hover: hover){
+  .favorito-card:hover{
+    transform: translateY(-5px);
+  }
+}
 .favorito-card img {
+  display: block;
   width: 100%;
   aspect-ratio: 2 / 3;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 10px;
   border: 1px solid #e8ddd0;
+  box-shadow: 0 5px 12px rgba(92, 64, 51, 0.15);
 }
-
 .favorito-card p {
   font-size: 12px;
+  font-weight: 500;
   color: #5c4033;
-  margin-top: 8px;
+  margin-top: 10px;
+  line-height: 1.4;
   overflow-wrap: anywhere;
+}
+.estadisticas{
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 12px;
+  margin: 0 20px 28px;
+}
+.estadistica{
+  background: #fffdf9;
+  border: 1px solid #e8ddd0;
+  border-radius: 16px;
+  padding: 20px 8px;
+  text-align: center;
+  min-width: 0;
+  box-shadow: 0 3px 10px rgba(92, 64, 51, 0.05);
+}
+.estadistica h3{
+  font-size: 28px;
+  font-weight: 700;
+  color: #795548;
+  margin: 0 0 8px;
+}
+.estadistica p{
+  font-size: 12px;
+  color: #8d7768;
+  margin: 0;
+}
+@media(max-width: 360px){
+  .estadisticas{
+    gap:8px;
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+  .estadistica{
+    padding: 16px 4px;
+  }
 }

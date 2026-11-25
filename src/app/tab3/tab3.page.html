@@ -51,6 +51,9 @@
           {{estrella <= resena.calificacion ? '★' : '☆'}}
         </span>
       </p>
+      <p class="comentario-resena" *ngIf="resena.comentario">
+        {{resena.comentario}}
+      </p>
     </div>
   </div>
 </ion-content>
