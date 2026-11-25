@@ -1,109 +1,109 @@
+$chocolate: #4b3028;
+$crema: #f7ead8;
+$papel: #f5e8d5;
+$beige: #eee0cd;
+$borde: #d8c3a7;
+$dorado: #c5a477;
+$marron: #705548;
+$suave: #806e63;
 ion-content {
   --background: #f8f4ee;
 }
-ion-toolbar {
-  --background: #f8f4ee;
-  --color: #5c4033;
+ion-header ion-toolbar.toolbar-perfil {
+  --background: #4b3028;
+  --color: #f7ead8;
+  ion-title {
+    font: 700 20px Georgia, serif;
+    text-align: center;
+    color: $crema;
+  }
 }
 .perfil-container {
-  padding: 24px 20px;
+  padding: 36px 20px 0;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 .perfil-header {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 35px 20px;
-  background: #efe4d7;
-  border-radius: 20px;
-  border: 1px solid #e0d1c1;
-  box-shadow: 0 4px 15px rgba(92, 64, 51, 0.06);
+  padding: 30px 20px;
+  background: $papel;
+  border: 1px solid $dorado;
+  border-radius: 18px;
+  box-shadow: 0 4px 12px rgba(75, 48, 40, 0.1);
+  h2 {
+    font: 700 24px Georgia, serif;
+    color: $chocolate;
+    margin: 0 0 8px;
+  }
+  p {
+    font-size: 14px;
+    color: $suave;
+    margin: 0;
+  }
 }
 .avatar {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 105px;
-  height: 105px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
-  background: #fffdf9;
-  color: #795548;
+  background: $beige;
+  color: $chocolate;
+  border: 3px solid $dorado;
   margin-bottom: 18px;
-  border: 3px solid #d8c2ac;
-  box-shadow: 0 4px 12px rgba(92, 64, 51, 0.12);
+
   ion-icon {
-    font-size: 80px;
+    font-size: 76px;
   }
 }
-.perfil-header h2 {
-  font-size: 22px;
-  font-weight: 600;
-  color: #5c4033;
-  margin: 0 0 8px;
+.estadisticas {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 24px auto 28px;
+  padding: 0 20px;
+  max-width: 1200px;
 }
-.perfil-header p {
+.estadistica {
+  background: $papel;
+  border: 1px solid $borde;
+  border-radius: 14px;
+  padding: 20px 8px;
+  text-align: center;
+  min-width: 0;
+  h3 {
+    font: 700 28px Georgia, serif;
+    color: $chocolate;
+    margin: 0 0 8px;
+  }
+  p {
+    font-size: 12px;
+    color: $marron;
+    margin: 0;
+  }
+}
+.mis-favoritos,
+.mis-resenas {
+  margin: 24px auto;
+  padding: 0 20px;
+  max-width: 1200px;
+  h2 {
+    font: 700 22px Georgia, serif;
+    color: $chocolate;
+    margin: 0 0 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $borde;
+  }
+}
+.mis-favoritos > p,
+.mis-resenas > div > p {
   font-size: 14px;
-  color: #8d7768;
-  margin: 0;
-}
-.mis-resenas{
-  margin: 24px 20px;
-}
-.mis-resenas h2{
-  font-size: 20px;
-  font-weight: 600;
-  color:#5c4033;
-  margin-bottom: 16px;
-}
-.resena-card{
-  background: #fffdf9;
-  border: 1px solid #e8ddd0;
-  border-left: 4px solid #b89574;
-  border-radius: 16px;
-  padding: 20px;
-  margin-bottom: 16px;
-  box-shadow: 0 4px 12px rgba(92, 64, 51, 0.06);
-  transition: transform 0.2d ease;
-}
-@media(hover: hover){
-  .resena-card:hover{
-    transform: translateY(-3px);
-  }
-}
-.resena-card h3{
-  font-size: 18px;
-  font-weight: 600;
-  color: #5c4033;
-  margin: 0 0 12px;
-  line-height: 1.4;
-}
-.estrellas{
-  color: #c49a52;
-  font-size: 23px;
-  margin: 8px 0 12px;
-  letter-spacing: 3px;
-}
-.resena-card p{
+  color: $suave;
   line-height: 1.5;
-}
-.resena-card p:last-child{
-  color: #70594b;
-  font-size: 14px;
-  line-height: 1.6;
-  margin-bottom: 0;
-}
-.mis-favoritos {
-  margin: 24px 20px;
-}
-.mis-favoritos h2 {
-  font-size: 20px;
-  font-weight: 600;
-  color: #5c4033;
-  margin-bottom: 16px;
-}
-.mis-favoritos > p {
-  color: #8d7768;
-  font-size: 14px;
 }
 .favoritos-grid {
   display: grid;
@@ -114,63 +114,78 @@ ion-toolbar {
 .favorito-card {
   min-width: 0;
   text-align: center;
-  transition: trandlateY(-5px);
-}
-@media(hover: hover){
-  .favorito-card:hover{
-    transform: translateY(-5px);
+  transition: transform 0.2s ease;
+  img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid $borde;
+    box-shadow: 0 4px 10px rgba(75, 48, 40, 0.12);
+  }
+  p {
+    font-size: 12px;
+    font-weight: 600;
+    color: $chocolate;
+    margin-top: 10px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
   }
 }
-.favorito-card img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 2 / 3;
-  object-fit: cover;
-  border-radius: 10px;
-  border: 1px solid #e8ddd0;
-  box-shadow: 0 5px 12px rgba(92, 64, 51, 0.15);
-}
-.favorito-card p {
-  font-size: 12px;
-  font-weight: 500;
-  color: #5c4033;
-  margin-top: 10px;
-  line-height: 1.4;
-  overflow-wrap: anywhere;
-}
-.estadisticas{
-  display: grid;
-  grid-template-columns: repeat(3,minmax(0,1fr));
-  gap: 12px;
-  margin: 0 20px 28px;
-}
-.estadistica{
-  background: #fffdf9;
-  border: 1px solid #e8ddd0;
-  border-radius: 16px;
-  padding: 20px 8px;
-  text-align: center;
-  min-width: 0;
-  box-shadow: 0 3px 10px rgba(92, 64, 51, 0.05);
-}
-.estadistica h3{
-  font-size: 28px;
-  font-weight: 700;
-  color: #795548;
-  margin: 0 0 8px;
-}
-.estadistica p{
-  font-size: 12px;
-  color: #8d7768;
-  margin: 0;
-}
-@media(max-width: 360px){
-  .estadisticas{
-    gap:8px;
-    margin-left: 12px;
-    margin-right: 12px;
+.resena-card {
+  background: $papel;
+  border: 1px solid $borde;
+  border-left: 4px solid $dorado;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 3px 10px rgba(75, 48, 40, 0.08);
+  transition: transform 0.2s ease;
+  h3 {
+    font: 700 18px Georgia, serif;
+    color: $chocolate;
+    margin: 0 0 12px;
+    line-height: 1.4;
   }
-  .estadistica{
+  .estrellas {
+    color: #b88636;
+    font-size: 23px;
+    margin: 8px 0 12px;
+    letter-spacing: 3px;
+  }
+  .comentario-resena {
+    font-size: 14px;
+    color: $marron;
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+}
+@media (hover: hover) {
+  .favorito-card:hover,
+  .resena-card:hover {
+    transform: translateY(-3px);
+  }
+}
+@media (max-width: 576px) {
+  .perfil-container {
+    padding: 16px 10px 0;
+  }
+  .estadisticas {
+    padding: 0 10px;
+    gap: 8px;
+  }
+  .estadistica {
     padding: 16px 4px;
+    h3 {
+      font-size: 24px;
+    }
+  }
+  .mis-favoritos,
+  .mis-resenas {
+    padding: 0 10px;
+  }
+  .favoritos-grid {
+    gap: 8px;
   }
 }
