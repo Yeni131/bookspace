@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Mi Biblioteca</ion-title>
+  <ion-toolbar class="toolbar-biblioteca">
+    <ion-title>✦ Mi Biblioteca ✦</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
@@ -19,8 +19,7 @@
         Progreso: {{ obtenerPorcentajeReto() }}%
       </p>
       <ion-progress-bar
-        [value]="obtenerPorcentajeReto() / 100"
-        color="success">
+        [value]="obtenerPorcentajeReto() / 100">
       </ion-progress-bar>
       <ion-button
         expand="block"
@@ -29,7 +28,7 @@
         Cambiar mi meta
       </ion-button>
     </div>
-    <ion-segment [value]="categoriaSeleccionada" (ionChange)="cambiarCategoriaSeleccionada($event)">
+    <ion-segment mode="ios" [value]="categoriaSeleccionada" (ionChange)="cambiarCategoriaSeleccionada($event)">
       <ion-segment-button value="quiero-leer">
         <ion-label>Quiero leer</ion-label>
       </ion-segment-button>
@@ -40,29 +39,37 @@
         <ion-label>Leídos</ion-label>
       </ion-segment-button>
     </ion-segment>
-    <div class="biblioteca-resumen">
-      <h2>Mis libros</h2>
-      <span>
-        {{ obtenerLibrosPorCategoria().length }} libros
-      </span>
-    </div>
-    <div class="biblioteca-ordanamiento">
-      <ion-select label="Ordenar libros por"
-        label-placement="stacked"
-        interface="popover"
-        [value]="ordenSeleccionado"
-        (ionChange)="cambiarOrden($event)">
-        <ion-select-option value="recientes">
-          Últimos agregados
-        </ion-select-option>
-        <ion-select-option value="titulo-asc">
-          Título (A-Z)
-        </ion-select-option>
-        <ion-select-option value="titulo-desc">
-          Título (Z-A)
-      </ion-select-option>
-      </ion-select>
-    </div>
+<div class="biblioteca-resumen">
+  <h2>Mis libros</h2>
+  <span>
+    {{ obtenerLibrosPorCategoria().length }} libros
+  </span>
+</div>
+<div class="biblioteca-ordanamiento">
+  <span class="ordenamiento-label">
+    Ordenar por
+  </span>
+  <ion-select
+    aria-label="Ordenar libros por"
+    interface="popover"
+    [value]="ordenSeleccionado"
+    [selectedText]="
+      ordenSeleccionado === 'titulo-asc' ? 'Título (A-Z)' :
+      ordenSeleccionado === 'titulo-desc' ? 'Título (Z-A)' :
+      'Últimos agregados'
+    "
+    (ionChange)="cambiarOrden($event)">
+    <ion-select-option value="recientes">
+      Últimos agregados
+    </ion-select-option>
+    <ion-select-option value="titulo-asc">
+      Título (A-Z)
+    </ion-select-option>
+    <ion-select-option value="titulo-desc">
+      Título (Z-A)
+    </ion-select-option>
+  </ion-select>
+</div>
     <div class="biblioteca-vacia" *ngIf="obtenerLibrosPorCategoria().length === 0">
       <ion-icon name="library-outline"></ion-icon>
       <h3>Tu biblioteca está vacía</h3>

@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component,ChangeDetectorRef} from '@angular/core';
 import { IonProgressBar } from '@ionic/angular';
 import { NgFor, NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import {  IonHeader,  IonToolbar,IonTitle,  IonContent,  IonSegment,  IonSegmentButton,  IonLabel,  IonGrid,  IonRow,  IonCol,IonCard,IonCardContent,IonImg,IonSelect,IonSelectOption,IonButton,IonIcon,AlertController} from '@ionic/angular';
 import { Router } from '@angular/router';
 import {BibliotecaService,LibroGuardado,CategoriaLectura} from '../services/biblioteca.service';
@@ -10,7 +11,7 @@ import { trashOutline, libraryOutline } from 'ionicons/icons';
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
-  imports: [IonHeader,IonToolbar,IonTitle,IonContent,IonSegment,IonSegmentButton,IonLabel,IonGrid,IonRow,IonCol,IonCard,IonCardContent,IonImg,IonSelect,IonSelectOption,IonButton,IonIcon,NgFor,NgIf,IonProgressBar]})
+  imports: [IonHeader,IonToolbar,IonTitle,IonContent,IonSegment,IonSegmentButton,IonLabel,IonGrid,IonRow,IonCol,IonCard,IonCardContent,IonImg,IonSelect,IonSelectOption,IonButton,IonIcon,NgFor,NgIf,IonProgressBar,FormsModule]})
 export class Tab2Page {
   categoriaSeleccionada: CategoriaLectura = 'quiero-leer';
   librosGuardados: LibroGuardado[] = [];
@@ -19,7 +20,8 @@ export class Tab2Page {
   constructor(
     private bibliotecaService: BibliotecaService,
     private router: Router,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private cdr:ChangeDetectorRef
   ) {
     addIcons({ trashOutline, libraryOutline });
   }
@@ -92,6 +94,7 @@ export class Tab2Page {
     const nuevoOrden = event.detail.value;
     if(nuevoOrden){
       this.ordenSeleccionado=nuevoOrden;
+      this.cdr.detectChanges();
     }
   }
   obtenerLibrosPorCategoria(): LibroGuardado[] {
