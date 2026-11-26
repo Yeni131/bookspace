@@ -57,6 +57,7 @@ export class Tab3Page {
         console.error('Error al cargar el perfil:', error);
       }
     }
+    this.changeDetectorRef.detectChanges();
   }
   editarPerfil(): void {
     this.nombreTemporal = this.nombreUsuario;

@@ -19,5 +19,19 @@
     "usuario": "sofia_lectora",
     "biografia": "Entre libros, café y mundos imaginarios.",
     "avatar": "person-circle-outline"
+  },
+  {
+    "id": 4,
+    "nombre": "Valentina",
+    "usuario": "valen_entrelibros",
+    "biografia": "Fanática de las novelas románticas, los clásicos y las tardes de lectura.",
+    "avatar": "person-circle-outline"
+  },
+  {
+    "id": 5,
+    "nombre": "Nicolás",
+    "usuario": "nico_paginas",
+    "biografia": "Lector de fantasía, misterio y ciencia ficción. Siempre con un libro pendiente.",
+    "avatar": "person-circle-outline"
   }
 ]

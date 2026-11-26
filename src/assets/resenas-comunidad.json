@@ -1,4 +1,3 @@
-
 [
   {
     "idLibro": "OL274505W",
@@ -20,5 +19,124 @@
     "usuario": "Sofía",
     "calificacion": 5,
     "comentario": "Uno de mis libros favoritos. La forma en que está narrada la historia es simplemente hermosa."
+  },
+  {
+    "idLibro": "OL274505W",
+    "usuarioId": 4,
+    "usuario": "Valentina",
+    "calificacion": 5,
+    "comentario": "Me encantó descubrir la historia de los Buendía. Es una novela llena de personajes inolvidables."
+  },
+  {
+    "idLibro": "OL1905255W",
+    "usuarioId": 1,
+    "usuario": "Lucía",
+    "calificacion": 5,
+    "comentario": "Isabel Allende construye una historia fascinante. Me encantó la mezcla de acontecimientos familiares, historia y realismo mágico."
+  },
+  {
+    "idLibro": "OL1905255W",
+    "usuarioId": 2,
+    "usuario": "Mateo",
+    "calificacion": 4,
+    "comentario": "Una novela muy emotiva, con personajes complejos y momentos inolvidables. Algunas partes son duras, pero vale la pena."
+  },
+  {
+    "idLibro": "OL1905255W",
+    "usuarioId": 3,
+    "usuario": "Sofía",
+    "calificacion": 5,
+    "comentario": "Me atrapó desde las primeras páginas. Clara fue mi personaje favorito y el final me dejó pensando durante días."
+  },
+  {
+    "idLibro": "OL1905255W",
+    "usuarioId": 4,
+    "usuario": "Valentina",
+    "calificacion": 5,
+    "comentario": "Una historia familiar hermosa y conmovedora. Me gustó mucho cómo se desarrollan sus personajes."
+  },
+  {
+    "idLibro": "OL503666W",
+    "usuarioId": 1,
+    "usuario": "Lucía",
+    "calificacion": 5,
+    "comentario": "Un clásico extraordinario. La relación entre Don Quijote y Sancho Panza tiene momentos divertidos y reflexiones muy profundas."
+  },
+  {
+    "idLibro": "OL503666W",
+    "usuarioId": 2,
+    "usuario": "Mateo",
+    "calificacion": 4,
+    "comentario": "Al principio me costó acostumbrarme al lenguaje, pero las aventuras de Don Quijote terminaron conquistándome."
+  },
+  {
+    "idLibro": "OL503666W",
+    "usuarioId": 3,
+    "usuario": "Sofía",
+    "calificacion": 5,
+    "comentario": "Una historia que demuestra el poder de la imaginación. Me encantó el humor y la amistad entre los protagonistas."
+  },
+  {
+    "idLibro": "OL503666W",
+    "usuarioId": 5,
+    "usuario": "Nicolás",
+    "calificacion": 4,
+    "comentario": "Las aventuras de Don Quijote son entretenidas y originales. Mi personaje favorito fue Sancho Panza."
+  },
+  {
+    "idLibro": "OL34754182W",
+    "usuarioId": 1,
+    "usuario": "Lucía",
+    "calificacion": 5,
+    "comentario": "Rayuela es una experiencia literaria única. Julio Cortázar logra que el lector participe activamente en la historia."
+  },
+  {
+    "idLibro": "OL34754182W",
+    "usuarioId": 2,
+    "usuario": "Mateo",
+    "calificacion": 3,
+    "comentario": "Me pareció una lectura desafiante. La estructura es interesante, pero algunas partes me resultaron difíciles de seguir."
+  },
+  {
+    "idLibro": "OL34754182W",
+    "usuarioId": 3,
+    "usuario": "Sofía",
+    "calificacion": 5,
+    "comentario": "Me encantó la libertad que ofrece para recorrer sus capítulos. Es un libro diferente, lleno de reflexiones sobre la vida y el amor."
+  },
+  {
+    "idLibro": "OL34754182W",
+    "usuarioId": 5,
+    "usuario": "Nicolás",
+    "calificacion": 4,
+    "comentario": "La forma de leer esta novela es muy interesante. No es una lectura sencilla, pero me sorprendió."
+  },
+  {
+    "idLibro": "OL14860424W",
+    "usuarioId": 1,
+    "usuario": "Lucía",
+    "calificacion": 5,
+    "comentario": "Volver a las aventuras de Don Quijote siempre es una experiencia especial. Una obra que sigue teniendo mucho que decir."
+  },
+  {
+    "idLibro": "OL14860424W",
+    "usuarioId": 2,
+    "usuario": "Mateo",
+    "calificacion": 4,
+    "comentario": "Disfruté especialmente los diálogos entre Don Quijote y Sancho. Una lectura extensa, pero llena de momentos memorables."
+  },
+  {
+    "idLibro": "OL14860424W",
+    "usuarioId": 3,
+    "usuario": "Sofía",
+    "calificacion": 4,
+    "comentario": "Una novela con mucho humor, aventuras y enseñanzas. Algunas partes son lentas, pero sus personajes son inolvidables."
+  },
+  {
+    "idLibro": "OL14860424W",
+    "usuarioId": 5,
+    "usuario": "Nicolás",
+    "calificacion": 5,
+    "comentario": "Un clásico que vale la pena conocer. Me gustaron las aventuras y la imaginación del protagonista."
   }
 ]
