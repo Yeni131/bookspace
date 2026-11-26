@@ -8,7 +8,7 @@ import {BibliotecaService,CategoriaLectura} from '../../services/biblioteca.serv
 import { ResenasService } from '../../services/resenas.service';
 import { ResenasComunidadService, ResenaComunidad } from '../../services/resenas-comunidad.service';
 import { addIcons } from 'ionicons';
-import { star, starOutline, heart,heartOutline } from 'ionicons/icons';
+import { star, starOutline, heart,heartOutline,chevronBack, chevronBackOutline } from 'ionicons/icons';
 @Component({
   selector: 'app-book-detail',
   templateUrl: './book-detail.page.html',
@@ -40,7 +40,7 @@ export class BookDetailPage implements OnInit {
     private resenasComunidadService: ResenasComunidadService,
     private cdr: ChangeDetectorRef
   ) {
-    addIcons({ star, starOutline,heart,heartOutline });
+    addIcons({ star, starOutline,heart,heartOutline,chevronBackOutline });
   }
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
