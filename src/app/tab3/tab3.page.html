@@ -4,13 +4,48 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-  <div class="perfil-container">
-    <div class="perfil-header">
-      <div class="avatar">
-        <ion-icon name="person-circle-outline"></ion-icon>
-      </div>
-      <h2>Lectora BookSpace</h2>
-      <p>Mi espacio de lectura</p>
+  <div class="perfil-header">
+    <div class="avatar">
+      <ion-icon name="person-circle-outline"></ion-icon>
+    </div>
+    <div *ngIf="!editandoPerfil" class="informacion-perfil">
+      <h2>{{ nombreUsuario }}</h2>
+      <p>{{ biografia }}</p>
+      <ion-button
+        fill="outline"
+        class="boton-editar"
+        (click)="editarPerfil()">
+        Editar perfil
+      </ion-button>
+    </div>
+    <div *ngIf="editandoPerfil" class="formulario-perfil">
+      <ion-input
+        label="Nombre de lector"
+        label-placement="stacked"
+        placeholder="Escribí tu nombre"
+        maxlength="40"
+        [(ngModel)]="nombreTemporal">
+      </ion-input>
+      <ion-textarea
+        label="Biografía"
+        label-placement="stacked"
+        placeholder="Contanos un poco sobre vos..."
+        maxlength="200"
+        [autoGrow]="true"
+        [(ngModel)]="biografiaTemporal">
+      </ion-textarea>
+      <ion-button
+        expand="block"
+        (click)="guardarPerfil()"
+        [disabled]="!nombreTemporal.trim()">
+        Guardar cambios
+      </ion-button>
+      <ion-button
+        expand="block"
+        fill="clear"
+        (click)="cancelarEdicion()">
+        Cancelar
+      </ion-button>
     </div>
   </div>
   <div class="estadisticas">

@@ -189,3 +189,60 @@ ion-header ion-toolbar.toolbar-perfil {
     gap: 8px;
   }
 }
+.informacion-perfil {
+  width: 100%;
+  text-align: center;
+  h2 {
+    font-family: Georgia, serif;
+    font-size: 24px;
+    color: #4b3028;
+    margin-bottom: 10px;
+    overflow-wrap: anywhere;
+  }
+  p {
+    font-size: 14px;
+    color: #806e63;
+    line-height: 1.6;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+  }
+}
+.boton-editar {
+  --background: transparent;
+  --color: #4b3028;
+  --border-color: #c5a477;
+  --border-width: 1px;
+  --border-radius: 10px;
+  margin-top: 20px;
+  font-weight: 600;
+  text-transform: none;
+}
+.formulario-perfil {
+  width: 100%;
+  max-width: 450px;
+  margin: 10px auto 0;
+  text-align: left;
+  ion-input,
+  ion-textarea {
+    --background: #f8f4ee;
+    --color: #4b3028;
+    --placeholder-color: #806e63;
+    border: 1px solid #d8c3a7;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 16px;
+  }
+  ion-button {
+    --background: #4b3028;
+    --color: #f7ead8;
+    --border-radius: 10px;
+
+    margin-top: 12px;
+    text-transform: none;
+    font-weight: 600;
+  }
+  ion-button[fill="clear"] {
+    --background: transparent;
+    --color: #705548;
+  }
+}
