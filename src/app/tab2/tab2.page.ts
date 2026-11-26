@@ -31,6 +31,7 @@ export class Tab2Page {
   }
   cargarLibros(): void {
     this.librosGuardados = this.bibliotecaService.obtenerLibros();
+    this.cdr.detectChanges();
   }
   cargarMetaLectura(): void{
     const metaGuardada = localStorage.getItem('bookspace_meta_lectura');
